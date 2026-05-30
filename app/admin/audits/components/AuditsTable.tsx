@@ -150,7 +150,7 @@ const AuditsTable: FC<AuditsTableProps> = ({ audits, setSelectedAudit }) => {
                             <div className="w-12 h-16 bg-blue-100 rounded flex items-center justify-center overflow-hidden">
                               <Image 
                                 src={book.product_image || '/placeholder-book.png'} 
-                                alt={book.product_name}
+                                alt={book.product_name || '产品图片'}
                                 width={48}
                                 height={64}
                                 className="w-full h-full object-cover"

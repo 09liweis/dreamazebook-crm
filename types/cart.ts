@@ -22,7 +22,7 @@ export interface CartItem {
   picbook_name?: string;
   picbook_cover?: string;
   message?: string;
-  status?: string;
+  status: string;
   sku_code?: string;
   created_at?: string;
   updated_at?: string;
