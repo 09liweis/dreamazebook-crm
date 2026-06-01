@@ -5,6 +5,18 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: true,
   serverExternalPackages: ['mailgun.js'],
+  async rewrites() {
+    // Proxy /api/* to backend.
+    // NEXT_PUBLIC_API_URL is the full base (e.g. https://api.dreamazebook.com/api)
+    // The source already captures /api/ prefix, so destination appends :path*
+    const apiBase = (process.env.NEXT_PUBLIC_API_URL || 'https://api.dreamazebook.com/api').replace(/\/+$/, '');
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${apiBase}/:path*`,
+      },
+    ];
+  },
   experimental: {
     imgOptTimeoutInSeconds: 30,
   },

@@ -5,9 +5,4 @@ declare const api: {
     delete: <T = any>(url: string, config?: RequestInit) => Promise<T>;
 };
 
-export function fetchDreamazebookApi(
-    path: string,
-    options?: Omit<RequestInit, 'credentials'> & { timeoutMs?: number }
-): Promise<any>;
-
 export default api;
