@@ -69,13 +69,13 @@ export const FormSubmitSections = memo(({
                 loginWithCode: translations.loginWithCode,
               }}
             />
-            <OAuthButtons
+            {/* <OAuthButtons
               googleLoading={googleLoading}
               facebookLoading={facebookLoading}
               onGoogleClick={onGoogleLogin}
               onFacebookClick={onFacebookLogin}
               label={translations.orContinueWith}
-            />
+            /> */}
           </div>
         </LoginSubmitSection>
       )}
@@ -94,13 +94,13 @@ export const FormSubmitSections = memo(({
               login: translations.login,
             }}
           />
-          <OAuthButtons
+          {/* <OAuthButtons
             googleLoading={googleLoading}
             facebookLoading={facebookLoading}
             onGoogleClick={onGoogleLogin}
             onFacebookClick={onFacebookLogin}
             label={translations.orContinueWith}
-          />
+          /> */}
         </RegisterSubmitSection>
       )}
 
@@ -119,13 +119,13 @@ export const FormSubmitSections = memo(({
               loginWithCode: translations.loginWithCode,
             }}
           />
-          <OAuthButtons
+          {/* <OAuthButtons
             googleLoading={googleLoading}
             facebookLoading={facebookLoading}
             onGoogleClick={onGoogleLogin}
             onFacebookClick={onFacebookLogin}
             label={translations.orContinueWith}
-          />
+          /> */}
         </ForgotPasswordSubmitSection>
       )}
 
@@ -146,13 +146,13 @@ export const FormSubmitSections = memo(({
               usePasswordInstead: translations.usePasswordInstead,
             }}
           />
-          <OAuthButtons
+          {/* <OAuthButtons
             googleLoading={googleLoading}
             facebookLoading={facebookLoading}
             onGoogleClick={onGoogleLogin}
             onFacebookClick={onFacebookLogin}
             label={translations.orContinueWith}
-          />
+          /> */}
         </CodeLoginSubmitSection>
       )}
 
