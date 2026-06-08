@@ -186,7 +186,7 @@ export default function LoginModal({ showCloseButton = false, title = 'Welcome t
   const handleVerifyLoginCode = async (email: string, code: string) => {
     const response = await verifyLoginCode(email, code)
     if (response?.success) {
-      handlePostLoginRedirect()
+      handlePostLoginRedirect('/admin')
     } else {
       updateState({ errorMessage: 'Failed to verify code' })
     }
@@ -202,7 +202,7 @@ export default function LoginModal({ showCloseButton = false, title = 'Welcome t
 
     const response = await login({ email, password })
     if (response?.success) {
-      handlePostLoginRedirect()
+      handlePostLoginRedirect('/admin')
     } else {
       updateState({ errorMessage: 'Login failed' })
     }
