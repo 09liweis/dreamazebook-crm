@@ -193,14 +193,7 @@ export default function LoginModal({ showCloseButton = false, title = 'Welcome t
   }
 
   const handleLogin = async (email: string, password: string) => {
-    if (email.includes('admin')) {
-      const response = await loginAdmin({ email, password })
-      if (response?.success) {
-        handlePostLoginRedirect('/admin')
-      }
-    }
-
-    const response = await login({ email, password })
+    const response = await loginAdmin({ email, password })
     if (response?.success) {
       handlePostLoginRedirect('/admin')
     } else {
