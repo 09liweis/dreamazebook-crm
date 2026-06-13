@@ -50,10 +50,51 @@ export interface AdminUser {
   user_type: string;
   last_login_at: string | null;
   last_login_ip: string | null;
+  last_login_country: string | null;
+  last_login_city: string | null;
+  register_ip: string | null;
+  register_country: string | null;
+  register_city: string | null;
+  has_set_password: boolean;
   created_at: string;
   updated_at: string;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  utm_content: string | null;
+  utm_term: string | null;
+  first_referrer: string | null;
+  first_landing_url: string | null;
+  source_captured_at: string | null;
   roles: Array<Role>;
   permissions: Permission[];
+}
+
+export interface UsersListMeta {
+  current_page: number;
+  first_page_url: string;
+  from: number;
+  last_page: number;
+  last_page_url: string;
+  links: Array<{
+    url: string | null;
+    label: string;
+    active: boolean;
+  }>;
+  next_page_url: string | null;
+  path: string;
+  per_page: number;
+  prev_page_url: string | null;
+  to: number;
+  total: number;
+}
+
+export interface UsersListResponse {
+  success: boolean;
+  data: {
+    current_page: number;
+    data: AdminUser[];
+  } & UsersListMeta;
 }
 
 // 购物车相关的类型定义

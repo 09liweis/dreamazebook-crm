@@ -1,64 +1,47 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import api from '@/utils/api';
-import { API_ADMIN_ROLES, API_ADMIN_USERS } from '@/constants/api';
-import { AdminUser, ApiResponse, Role } from '@/types/api';
+import { API_ADMIN_USERS } from '@/constants/api';
+import { AdminUser, UsersListMeta } from '@/types/api';
 
-interface User {
-  id: string;
-  name?: string;
-  email: string;
-  created_at: string;
-  updated_at: string;
-  region?: string;
-  source?: string;
-  satisfaction?: string;
-  order_count?: number;
-  total_spent?: number;
+export interface UsersDataResult {
+  users: AdminUser[];
+  meta: UsersListMeta | null;
+  loading: boolean;
+  error: string | null;
+  fetchUsers: (page: number) => void;
 }
 
-export const useUsersData = (filters:any) => {
+export const useUsersData = (): UsersDataResult => {
   const [users, setUsers] = useState<AdminUser[]>([]);
+  const [meta, setMeta] = useState<UsersListMeta | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const [roles, setRoles] = useState<Role[]>([]);
-
-  const getAdminUsersAPI = () => {
-    const {role} = filters;
-    let result = API_ADMIN_USERS+'?';
-    if (role) {
-      result += `role=${role}`;
+  const fetchUsers = useCallback(async (page: number = 1) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await api.get(`${API_ADMIN_USERS}?page=${page}`);
+      if (response.success && response.data) {
+        setUsers(response.data.data);
+        const { data, ...rest } = response.data;
+        setMeta(rest as UsersListMeta);
+      } else {
+        setError('Failed to fetch users');
+      }
+    } catch (err) {
+      console.error('Error fetching users:', err);
+      setError('Failed to load users');
+    } finally {
+      setLoading(false);
     }
-    return result
-  }
+  }, []);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await api.get<ApiResponse>(getAdminUsersAPI());
-        if (response.success && response.data) {
-          setUsers(response.data?.data);
-        } else {
-          setError('Failed to fetch users');
-        }
+    fetchUsers(1);
+  }, [fetchUsers]);
 
-        const {success, data} = await api.get<ApiResponse>(API_ADMIN_ROLES);
-        if (success && data) {
-          setRoles(data?.data);
-        }
-
-      } catch (err) {
-        console.error('Error fetching users:', err);
-        setError('Failed to load users');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUsers();
-  }, [filters]);
-
-  return { users, loading, error, setUsers, roles };
+  return { users, meta, loading, error, fetchUsers };
 };

@@ -3,13 +3,7 @@
 import { useState } from 'react';
 
 export const useUsersPagination = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [page, setPage] = useState(1);
 
-  return {
-    currentPage,
-    setCurrentPage,
-    itemsPerPage,
-    setItemsPerPage,
-  };
+  return { page, setPage };
 };
